@@ -1,4 +1,4 @@
-package algorithm;
+package hexpaths;
 import java.io.*;
 import java.nio.file.*;
 import java.util.*;

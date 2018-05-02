@@ -1,4 +1,4 @@
-package algorithm;
+package hexpaths;
 public class Hex implements Comparable<Hex> {
     int current;
     int position;
