@@ -12,7 +12,6 @@ public class Dijkstra {
 
     public Dijkstra(){
         makehoneycomb();
-        //getedges(makehoneycomb[8])
     }
 
 
@@ -21,10 +20,31 @@ public class Dijkstra {
     public Hex[] getEdges(Hex tile){
       int i=0;
       Hex[] edges= new Hex[6];
-      if (honeycomb[tile.position+15] != null){
+      if (tile.canNW()){
+        edges[i]=honeycomb[tile.position-8];
+        i++;
+      }
+      if (tile.canN()){
+        edges[i]=honeycomb[tile.position-15];
+        i++;
+      }
+      if (tile.canNE()){
+        edges[i]=honeycomb[tile.position-7];
+        i++;
+      }
+      if (tile.canSE()){
+        edges[i]=honeycomb[tile.position+8];
+        i++;
+      }
+      if (tile.canS()){
         edges[i]=honeycomb[tile.position+15];
         i++;
       }
+      if (tile.canSW()){
+        edges[i]=honeycomb[tile.position+7];
+        i++;
+      }
+      System.out.println(i);
       return edges;
     }
 
@@ -67,7 +87,8 @@ public class Dijkstra {
                   honeycomb[i].bottomedge=true;
                 }
 
-              honeycomb[i].printvalues();
+            //  honeycomb[i].printvalues();
+              getEdges(honeycomb[i]);
               i++;
 
           }

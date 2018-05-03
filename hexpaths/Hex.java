@@ -9,6 +9,7 @@ public class Hex implements Comparable<Hex> {
     boolean nextbottomedge=false;
     boolean bottomedge=false;
 
+
     public Hex(int position, int current) {
          this.position = position;
          this.current = current;
@@ -31,6 +32,44 @@ public class Hex implements Comparable<Hex> {
 
       return 0;
      }
+
+     public boolean canN(){
+       if ((this.topedge==true)||(this.nexttopedge==true))
+         return false;
+         else
+           return true;
+     }
+     public boolean canNE(){
+       if ((this.topedge==true)||(this.rightedge==true))
+         return false;
+         else
+           return true;
+     }
+     public boolean canSE(){
+       if ((this.rightedge==true)||(this.leftedge==true))
+         return false;
+         else
+           return true;
+     }
+     public boolean canS(){
+       if ((this.bottomedge==true)||(this.nextbottomedge==true))
+         return false;
+         else
+           return true;
+     }
+     public boolean canSW(){
+       if ((this.leftedge==true)&&(this.bottomedge==true))
+         return false;
+         else
+           return true;
+     }
+     public boolean canNW(){
+       if ((this.topedge==true)&&(this.leftedge==true))
+         return false;
+         else
+           return true;
+     }
+
      @Override
          public int compareTo(Hex o) {
              return 0;
