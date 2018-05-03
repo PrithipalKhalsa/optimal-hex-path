@@ -12,45 +12,9 @@ public class Dijkstra {
 
     public Dijkstra(){
         makehoneycomb();
+        //getedges(makehoneycomb[8])
     }
 
-    dijktrasAlgorithm(Hex[] graph, int start, int end){
-      int i;
-      int v;
-      int w;
-      int weight;
-      int distance;
-      boolean[] intree = new boolean[234];
-      int[] distance = new int[234];
-      int[] parent = new int[234];
-      for (int i = 1 ; i <= 233 ; i++){
-       intree[i] = FALSE ;
-       distance[i]=Integer.MAX_VALUE; //global const MAXINT=max integer
-      parent[i] = -1 ;
-      }
-      distance[start] = 0 ;
-      v = start ;
-      while ( !intree[v] ){
-        intree[v] = TRUE ;
-        //maybe call get edges here
-        // p = g-> edges[v] ;//these edges are the neighbors of the selected tile v
-        while ( p != NULL ){
-            w = p->y ;
-            weight = p->weight ;
-            if ( distance[w] > (distance[v] + weight) ) {
-                distance[w] = distance[v] + weight ;
-                parent[w] = v ;
-            }
-            p = p->next ;
-          }
-          v = 1 ;
-          dist = MAXINT ;
-          for ( i = 1 ; i <= g->nvertices ; i++ )
-            if ( !intree[i] && (dist > distance[i]) ){
-              dist = distance[i] ;
-              v = i ;
-            }
-    }
 
 
 
@@ -61,25 +25,57 @@ public class Dijkstra {
         edges[i]=honeycomb[tile.position+15];
         i++;
       }
+      return edges;
     }
+
 
     // this will take the txt files and turn it into an arrra
     public void makehoneycomb(){
-
+      int row=0;
+      //int j=1;
       try  (BufferedReader br = new BufferedReader(new FileReader(inFile))){
           int i=1;
           for (String line = br.readLine(); line != null; line = br.readLine()) {
               String[] temp = line.split(" ");
               honeycomb[i]= new Hex(Integer.parseInt(temp[0]),Integer.parseInt(temp[1]));
+
+                if (honeycomb[i].position==1){
+                  honeycomb[i].leftedge=true;
+                  honeycomb[i].topedge=true;
+                }
+                if ((honeycomb[i].position<=8)&&(honeycomb[i].position !=1)){
+                  honeycomb[i].topedge=true;
+
+                  if (honeycomb[i].position==8)
+                    honeycomb[i].rightedge=true;
+                }
+                if (honeycomb[i].position<=15 &&(honeycomb[i].position>8)){
+                  honeycomb[i].nexttopedge=true;
+
+                }
+                if((honeycomb[i].position-1)/8==row){
+                  honeycomb[i].leftedge=true;
+
+                }
+                if((honeycomb[i].position-8)/15==row&&(honeycomb[i].position>8)){
+                  honeycomb[i].rightedge=true;
+                  row++;
+                }
+                if(row>14){
+                  honeycomb[i].nextbottomedge=true;
+                  if(honeycomb[i].position>225)
+                  honeycomb[i].bottomedge=true;
+                }
+
               honeycomb[i].printvalues();
               i++;
+
           }
         }
        catch (IOException e) {
           e.printStackTrace();
       }
   }
-
 
 
       //take 234 inputs and make them hex objects
