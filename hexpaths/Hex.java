@@ -36,38 +36,51 @@ public class Hex implements Comparable<Hex> {
      public boolean canN(){
        if ((this.topedge==true)||(this.nexttopedge==true))
          return false;
-         else
+         else{
+           //System.out.print("N");
            return true;
+
+         }
      }
      public boolean canNE(){
        if ((this.topedge==true)||(this.rightedge==true))
          return false;
-         else
+         else{
+          // System.out.print("NE");
            return true;
+         }
      }
      public boolean canSE(){
-       if ((this.rightedge==true)||(this.leftedge==true))
+       if ((this.rightedge==true)||(this.bottomedge==true))
          return false;
-         else
+         else{
+           //System.out.print("SE");
            return true;
+         }
      }
      public boolean canS(){
        if ((this.bottomedge==true)||(this.nextbottomedge==true))
          return false;
-         else
+         else{
+          // System.out.print("S");
            return true;
+         }
      }
      public boolean canSW(){
-       if ((this.leftedge==true)&&(this.bottomedge==true))
+       if ((this.leftedge==true)||(this.bottomedge==true))
          return false;
-         else
+         else {
+          // System.out.print("SW");
            return true;
+         }
      }
      public boolean canNW(){
-       if ((this.topedge==true)&&(this.leftedge==true))
+       if ((this.topedge==true)||(this.leftedge==true))
          return false;
-         else
+         else {
+          // System.out.print("NW");
            return true;
+         }
      }
 
      @Override

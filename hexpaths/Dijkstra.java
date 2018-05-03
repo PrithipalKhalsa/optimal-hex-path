@@ -16,7 +16,7 @@ public class Dijkstra {
 
 
 
-
+    //this finds the neighbors
     public Hex[] getEdges(Hex tile){
       int i=0;
       Hex[] edges= new Hex[6];
@@ -44,7 +44,7 @@ public class Dijkstra {
         edges[i]=honeycomb[tile.position+7];
         i++;
       }
-      System.out.println(i);
+
       return edges;
     }
 
@@ -73,22 +73,26 @@ public class Dijkstra {
                   honeycomb[i].nexttopedge=true;
 
                 }
-                if((honeycomb[i].position-1)/8==row){
+                if(((honeycomb[i].position-1)/8==row)&&(honeycomb[i].position>8)){
                   honeycomb[i].leftedge=true;
 
                 }
-                if((honeycomb[i].position-8)/15==row&&(honeycomb[i].position>8)){
+                if(row>14){
+                  honeycomb[i].nextbottomedge=true;
+                  if(honeycomb[i].position>225){
+                    if(honeycomb[i].position==226)
+                        honeycomb[i].leftedge=true;
+                    honeycomb[i].bottomedge=true;
+                  }
+                }
+                if(((honeycomb[i].position-8)/15==row)&&(honeycomb[i].position>8)){
                   honeycomb[i].rightedge=true;
                   row++;
                 }
-                if(row>14){
-                  honeycomb[i].nextbottomedge=true;
-                  if(honeycomb[i].position>225)
-                  honeycomb[i].bottomedge=true;
-                }
+
 
             //  honeycomb[i].printvalues();
-              getEdges(honeycomb[i]);
+
               i++;
 
           }
