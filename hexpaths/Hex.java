@@ -2,89 +2,52 @@ package hexpaths;
 public class Hex implements Comparable<Hex> {
     int current;
     int position;
-    boolean topedge=false;
-    boolean nexttopedge=false;
-    boolean rightedge=false;
-    boolean leftedge=false;
-    boolean nextbottomedge=false;
-    boolean bottomedge=false;
+    int row;
+    int col;
+    boolean n=true;
+    boolean ne=true;
+    boolean se=true;
+    boolean s=true;
+    boolean sw=true;
+    boolean nw=true;
+
+    public Hex(int pos, int cost) {
+  		this.position = pos;
+  		this.current = cost;
+  	}
 
 
-    public Hex(int position, int current) {
+  public Hex(int position, int current, int row, int col){
+        super();
          this.position = position;
          this.current = current;
+         this.row = row;
+         this.col = col;
+         if (col==1){
+           this.sw=this.nw=false;
+         }
+         if (col==8){
+           this.se=this.ne=false;
+         }
+         if (row==1){
+           this.n=false;
+           if(col<=8){
+             this.nw= this.ne=false;
+           }
+         }
+        if (row==15 && col>8){
+          this.s=false;
+        }
+        if(row==16){
+          this.s=this.se=this.sw=false;
+        }
 
      }
 
-     public int printvalues(){
-       System.out.print(this.position+" ");
-       System.out.print(this.current);
-       System.out.println(this.bottomedge);
-       return 0;
-     }
-     public int printgrid(){
-       if (this.rightedge==true)
-          System.out.println(this.position+" ");
-       if (this.leftedge==true)
-          System.out.print("   "+this.position);
-      if ((this.leftedge==false)&&(this.rightedge==false))
-          System.out.print("  "+this.position+"   ");
 
-      return 0;
-     }
+        @Override
+         public int compareTo(Hex obj) {
+         return this.current - obj.current;
 
-     public boolean canN(){
-       if ((this.topedge==true)||(this.nexttopedge==true))
-         return false;
-         else{
-           //System.out.print("N");
-           return true;
-
-         }
-     }
-     public boolean canNE(){
-       if ((this.topedge==true)||(this.rightedge==true))
-         return false;
-         else{
-          // System.out.print("NE");
-           return true;
-         }
-     }
-     public boolean canSE(){
-       if ((this.rightedge==true)||(this.bottomedge==true))
-         return false;
-         else{
-           //System.out.print("SE");
-           return true;
-         }
-     }
-     public boolean canS(){
-       if ((this.bottomedge==true)||(this.nextbottomedge==true))
-         return false;
-         else{
-          // System.out.print("S");
-           return true;
-         }
-     }
-     public boolean canSW(){
-       if ((this.leftedge==true)||(this.bottomedge==true))
-         return false;
-         else {
-          // System.out.print("SW");
-           return true;
-         }
-     }
-     public boolean canNW(){
-       if ((this.topedge==true)||(this.leftedge==true))
-         return false;
-         else {
-          // System.out.print("NW");
-           return true;
-         }
-     }
-
-     @Override
-         public int compareTo(Hex o) {
-             return 0;
          }
 }
